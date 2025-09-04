@@ -1826,6 +1826,10 @@ const grid = document.getElementById("portfolioGrid");
 const renderPortfolio = (filter = null) => {
   grid.innerHTML = "";
 
+  if (!filter) {
+    return;
+  }
+
   portfolioItems
     .filter((item) => {
       if (!filter) return false; // kalau null → kosongkan
@@ -1844,7 +1848,7 @@ const renderPortfolio = (filter = null) => {
 };
 
 // render semua saat awal
-renderPortfolio("all");
+// renderPortfolio("all");
 
 document.querySelectorAll(".filter-btn").forEach((btn) => {
   btn.addEventListener("click", () => {

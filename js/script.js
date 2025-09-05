@@ -80,7 +80,7 @@ for (let i = 1; i <= 38; i++) {
   });
 }
 
-for (let i = 1; i <= 43; i++) {
+for (let i = 1; i <= 42; i++) {
   portfolioItems.push({
     title: "Wallpanel",
     tag: "Wallpanel",
@@ -92,7 +92,7 @@ for (let i = 1; i <= 48; i++) {
   portfolioItems.push({
     title: "Backdrop",
     tag: "Backdrop",
-    img: `/img/Backdrop/b (${i}).jpeg`,
+    img: `/img/Backdrop/b${i}.jpeg`,
   });
 }
 
@@ -118,6 +118,10 @@ const renderPortfolio = (filter = null) => {
         <img src="${item.img}" alt="${item.title}">
         <h4>${item.title}</h4>
       `;
+
+      const imgEl = div.querySelector("img");
+      imgEl.addEventListener("click", () => openModal(item.img));
+
       grid.appendChild(div);
     });
 };
@@ -142,6 +146,29 @@ document.querySelectorAll(".filter-btn").forEach((btn) => {
       renderPortfolio(btn.dataset.filter);
     }
   });
+});
+
+// ==== PORTFOLIO GRID + MODAL ====
+const portfolioGrid = document.getElementById("portfolioGrid");
+const portfolioModal = document.getElementById("portfolioModal");
+const modalImg = document.getElementById("modalImage");
+const closePortfolio = portfolioModal.querySelector(".close");
+
+let currentIndex = 0;
+let currentGroup = [];
+
+function openModal(src) {
+  portfolioModal.style.display = "flex";
+  modalImg.src = src;
+}
+
+closePortfolio.addEventListener(
+  "click",
+  () => (portfolioModal.style.display = "none")
+);
+
+portfolioModal.addEventListener("click", (e) => {
+  if (e.target === portfolioModal) portfolioModal.style.display = "none";
 });
 
 document.querySelectorAll(".nav-links a").forEach((link) => {
